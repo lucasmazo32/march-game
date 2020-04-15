@@ -1,12 +1,13 @@
 import './style/style.scss';
 import 'phaser';
 import config from './Config/config';
-import GameScene from './Scenes/gameScene';
 import BootScene from './Scenes/bootScene';
 import PreloaderScene from './Scenes/preloaderScene';
 import TitleScene from './Scenes/titleScene';
 import OptionsScene from './Scenes/optionsScene';
 import CreditsScene from './Scenes/creditScene';
+import Level1 from './Scenes/Level/level1';
+import Level2 from './Scenes/Level/level2';
 import Model from './model';
 
 class Game extends Phaser.Game {
@@ -19,7 +20,8 @@ class Game extends Phaser.Game {
     this.scene.add('Title', TitleScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
-    this.scene.add('Game', GameScene);
+    this.scene.add('Level-1', Level1);
+    this.scene.add('Level-2', Level2);
     this.scene.start('Boot');
   }
 }

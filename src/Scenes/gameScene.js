@@ -2,15 +2,17 @@
 import 'phaser';
 import logo from '../assets/logo.png';
 import backgroundGame from '../assets/objects/bk-game.png';
-import { character, groundMed } from './Helper/game';
+import character from '../assets/characters/character.png';
+import groundMed from '../assets/objects/plataform/WaveForest_Square.png';
 
 let player;
 let ground;
 let cursors;
 
 export default class GameScene extends Phaser.Scene {
-  constructor() {
-    super('Game');
+  constructor(scene) {
+    super(scene);
+    this.scene = scene;
   }
 
   preload() {
@@ -74,10 +76,10 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
+    player.setCollideWorldBounds(true);
 
     // collitions
 
-    player.setCollideWorldBounds(true);
     this.physics.add.collider(player, ground);
 
     // cursors
@@ -87,12 +89,15 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     if (cursors.left.isDown) {
-      player.setVelocityX(-160);
+      player.setAccelerationX(-350);
+      player.setMaxVelocity(200, 500);
       player.anims.play('left', true);
     } else if (cursors.right.isDown) {
-      player.setVelocityX(160);
+      player.setAccelerationX(350);
+      player.setMaxVelocity(200, 500);
       player.anims.play('right', true);
     } else {
+      player.setAccelerationX(0);
       player.setVelocityX(0);
       player.anims.play('standing', true);
     }
