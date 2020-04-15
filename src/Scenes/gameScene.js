@@ -1,9 +1,10 @@
 import 'phaser';
 import logo from '../assets/logo.png';
 import backgroundGame from '../assets/objects/bk-game.png';
-import character from '../assets/characters/character.png';
+import { character, groundMed } from './Helper/game';
 
 let player;
+let ground;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -20,14 +21,36 @@ export default class GameScene extends Phaser.Scene {
       startFrame: 0,
       endFrame: 202,
     });
+    this.load.image('ground', groundMed);
   }
 
 
   create() {
     this.add.image(400, 300, 'background-game').setScale(2);
-    this.add.image(400, 200, 'logo');
 
-    player = this.add.sprite(40, 100, 'character');
+    // ground Static groupd
+
+    ground = this.physics.add.staticGroup();
+
+    ground.create(32, 580, 'ground');
+    ground.create(96, 580, 'ground');
+    ground.create(160, 580, 'ground');
+    ground.create(224, 580, 'ground');
+    ground.create(288, 580, 'ground');
+    ground.create(352, 580, 'ground');
+    ground.create(416, 580, 'ground');
+    ground.create(480, 580, 'ground');
+    ground.create(544, 580, 'ground');
+    ground.create(608, 580, 'ground');
+    ground.create(672, 580, 'ground');
+    ground.create(736, 580, 'ground');
+    ground.create(800, 580, 'ground');
+
+    // player
+
+    player = this.physics.add.sprite(40, 100, 'character').setScale(2);
+
+    player.body.setGravityY(300);
 
     this.anims.create({
       key: 'standing',
@@ -64,6 +87,9 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    player.anims.play('jump-left', true);
+    // collitions
+
+    player.setCollideWorldBounds(true);
+    this.physics.add.collider(player, ground);
   }
 }
