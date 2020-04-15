@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import 'phaser';
 import logo from '../assets/logo.png';
 import backgroundGame from '../assets/objects/bk-game.png';
@@ -5,6 +6,7 @@ import { character, groundMed } from './Helper/game';
 
 let player;
 let ground;
+let cursors;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -73,23 +75,30 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.anims.create({
-      key: 'jump-right',
-      frames: this.anims.generateFrameNumbers('character', { start: 65, end: 70 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    this.anims.create({
-      key: 'jump-left',
-      frames: this.anims.generateFrameNumbers('character', { start: 169, end: 174 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
     // collitions
 
     player.setCollideWorldBounds(true);
     this.physics.add.collider(player, ground);
+
+    // cursors
+
+    cursors = this.input.keyboard.createCursorKeys();
+  }
+
+  update() {
+    if (cursors.left.isDown) {
+      player.setVelocityX(-160);
+      player.anims.play('left', true);
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(160);
+      player.anims.play('right', true);
+    } else {
+      player.setVelocityX(0);
+      player.anims.play('standing', true);
+    }
+
+    if (cursors.up.isDown && player.body.touching.down) {
+      player.setVelocityY(-330);
+    }
   }
 }
