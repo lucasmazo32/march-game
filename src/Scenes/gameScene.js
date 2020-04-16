@@ -7,7 +7,8 @@ import penguinSprite from '../assets/objects/penguin.png';
 import fullChest from '../assets/objects/treasure_chest.png';
 import simpleCoin from '../assets/objects/CoinYellow.png';
 import platformMed from '../assets/objects/plataform/WaveForest_HalfSquare.png';
-
+import steadyMummy from '../assets/characters/mummy-01.png';
+import movingMummy from '../assets/characters/mummy-02.png';
 
 let player;
 let ground;
@@ -52,6 +53,18 @@ export default class GameScene extends Phaser.Scene {
       frameHeight: 35,
       startFrame: 0,
       endFrame: 7,
+    });
+    this.load.spritesheet('steady-mummy', steadyMummy, {
+      frameWidth: 48,
+      frameHeight: 64,
+      startFrame: 0,
+      endFrame: 11,
+    });
+    this.load.spritesheet('move-mummy', movingMummy, {
+      frameWidth: 48,
+      frameHeight: 64,
+      startFrame: 0,
+      endFrame: 11,
     });
     this.load.image('coin', simpleCoin);
     this.load.image('plat-med', platformMed);
@@ -178,6 +191,14 @@ export default class GameScene extends Phaser.Scene {
 
   chestFun(textChange) {
     this.scoreFun(textChange, 200);
+  }
+
+  loosingScenario(num) {
+    outcomeText.setText('You Lost!');
+    timeFn.addEvent({
+      delay: 1000,
+      callback: () => { currentScene.start('LostLevel', { level: num }); },
+    });
   }
 
   winningScenario(num, cond = true) {

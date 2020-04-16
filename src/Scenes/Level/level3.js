@@ -20,7 +20,7 @@ export default class Level1 extends GameScene {
 
   create() {
     super.create();
-    this.text = this.add.text(635, 5, 'Level 3', { fontSize: 40, fill: '#fff' });
+    this.text = this.add.text(625, 5, 'Level 3', { fontSize: 40, fill: '#fff' });
 
     this.time.addEvent({
       delay: 300,

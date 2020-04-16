@@ -3,6 +3,11 @@ import 'phaser';
 import GameScene from '../gameScene';
 
 let platform;
+let mummy;
+let fullChest;
+let openChest;
+let chestCond = false;
+let remOverlap;
 
 export default class Level1 extends GameScene {
   constructor() {
@@ -16,7 +21,7 @@ export default class Level1 extends GameScene {
 
   create() {
     super.create();
-    this.text = this.add.text(635, 5, 'Level 4', { fontSize: 40, fill: '#fff' });
+    this.text = this.add.text(625, 5, 'Level 4', { fontSize: 40, fill: '#fff' });
 
     this.time.addEvent({
       delay: 300,
@@ -28,6 +33,86 @@ export default class Level1 extends GameScene {
     // platform
 
     platform = this.physics.add.staticGroup();
+
+    platform.create(210, 250, 'plat-med');
+    platform.create(148, 250, 'plat-med');
+    platform.create(86, 250, 'plat-med');
+    platform.create(24, 250, 'plat-med');
+
+    platform.create(769, 450, 'plat-med');
+    platform.create(707, 450, 'plat-med');
+    platform.create(645, 450, 'plat-med');
+    platform.create(583, 450, 'plat-med');
+
+    platform.create(521, 350, 'plat-med');
+    platform.create(459, 350, 'plat-med');
+    platform.create(397, 350, 'plat-med');
+    platform.create(335, 350, 'plat-med');
+
+    platform.create(707, 300, 'plat-med');
+    platform.create(645, 300, 'plat-med');
+    platform.create(583, 300, 'plat-med');
+
+    platform.create(769, 200, 'plat-med');
+    platform.create(707, 200, 'plat-med');
+    platform.create(645, 200, 'plat-med');
+
+    platform.create(210, 450, 'plat-med');
+    platform.create(148, 450, 'plat-med');
+    platform.create(86, 450, 'plat-med');
+    platform.create(24, 450, 'plat-med');
+
+    // chest
+
+    fullChest = this.physics.add.sprite(750, 0, 'full-chest');
+    fullChest.setBounce(0.2);
+
+    this.anims.create({
+      key: 'opening',
+      frames: this.anims.generateFrameNumbers('full-chest', { start: 0, end: 6 }),
+      frameRate: 1,
+    });
+
+    this.anims.create({
+      key: 'collected',
+      frames: this.anims.generateFrameNumbers('full-chest', { start: 7, end: 7 }),
+      frameRate: 1,
+    });
+
+    fullChest.anims.play('opening', true);
+
+    this.physics.add.collider(fullChest, platform);
+
+    remOverlap = this.physics.world;
+
+    openChest = this.physics.add.overlap(this.player, fullChest, () => {
+      if (chestCond) {
+        remOverlap.removeCollider(openChest);
+        return;
+      }
+      super.chestFun(this.scoreText);
+      fullChest.anims.play('collected', true);
+      chestCond = true;
+    });
+
+    // mummy
+
+    mummy = this.physics.add.sprite(540, 300, 'steady-mummy');
+
+    mummy.body.setSize(24, 32);
+    mummy.body.setOffset(12, 32);
+
+    this.anims.create({
+      key: 'standing-mummy',
+      frames: this.anims.generateFrameNumbers('steady-mummy', { start: 6, end: 8 }),
+      frameRate: 2,
+      repeat: -1,
+    });
+
+    mummy.anims.play('standing-mummy', true);
+    this.physics.add.collider(platform, mummy);
+
+    this.physics.add.overlap(this.player, mummy, () => { super.loosingScenario(4); });
 
     // colide
 

@@ -22,8 +22,11 @@ export default class LostScenario extends Phaser.Scene {
 
   create() {
     this.add.image(400, 300, 'background-loading');
+
+    this.text = this.add.text(230, 20, `Level ${this.level} is hard`, { fontSize: 40, fill: '#1b1b1b' });
+    this.text = this.add.text(140, 70, 'What do you want to do?', { fontSize: 40, fill: '#1b1b1b' });
     // Next Level
-    this.gameButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Repeat level', `Level-${this.level}`);
+    this.gameButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Repeat', `Level-${this.level}`);
 
     // Current
     this.optionsButton = new Button(this, config.width / 2, config.height / 2, 'blueButton1', 'blueButton2', 'Main Menu', 'Title');
