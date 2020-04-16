@@ -11,6 +11,8 @@ import Level2 from './Scenes/Level/level2';
 import Level3 from './Scenes/Level/level3';
 import Level4 from './Scenes/Level/level4';
 import Level5 from './Scenes/Level/level5';
+import Level6 from './Scenes/Level/level6';
+import Level7 from './Scenes/Level/level7';
 import WinScenario from './Scenes/winScenario';
 import LostScenario from './Scenes/lostScenario';
 import Model from './model';
@@ -30,9 +32,11 @@ class Game extends Phaser.Game {
     this.scene.add('Level-3', Level3);
     this.scene.add('Level-4', Level4);
     this.scene.add('Level-5', Level5);
+    this.scene.add('Level-6', Level6);
+    this.scene.add('Level-7', Level7);
     this.scene.add('WinLevel', WinScenario);
     this.scene.add('LostLevel', LostScenario);
-    this.scene.start('LostLevel', { level: 4 });
+    this.scene.start('Level-6');
   }
 }
 

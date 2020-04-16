@@ -19,6 +19,8 @@ export default class Level1 extends GameScene {
     super.create();
     this.text = this.add.text(625, 5, 'Level 2', { fontSize: 40, fill: '#fff' });
 
+    // coin
+
     this.time.addEvent({
       delay: 300,
       callback: super.scoreFun,
@@ -29,6 +31,12 @@ export default class Level1 extends GameScene {
     coin = this.physics.add.group();
     coin.create(750, 0, 'coin');
     coin.create(650, 0, 'coin');
+
+    this.physics.add.collider(coin, platform);
+    this.physics.add.overlap(this.player, coin, (thisPlayer, thisCoin) => {
+      super.coinFun(this.scoreText);
+      thisCoin.disableBody(true, true);
+    }, null, this);
 
     // platform
 
@@ -66,14 +74,6 @@ export default class Level1 extends GameScene {
 
     this.physics.add.collider(this.player, platform);
     this.physics.add.collider(this.penguin, platform);
-    this.physics.add.collider(coin, platform);
-
-    // Extra points with coin
-
-    this.physics.add.overlap(this.player, coin, (thisPlayer, thisCoin) => {
-      super.coinFun(this.scoreText);
-      thisCoin.disableBody(true, true);
-    }, null, this);
   }
 
   winningScenario() {
