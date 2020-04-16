@@ -18,6 +18,13 @@ export default class Level1 extends GameScene {
   create() {
     super.create();
 
+    this.time.addEvent({
+      delay: 2000,
+      callback: super.scoreFun,
+      args: [this.scoreText, -50],
+      repeat: 20,
+    });
+
     // platform
 
     platform = this.physics.add.staticGroup();
@@ -43,5 +50,10 @@ export default class Level1 extends GameScene {
 
     this.physics.add.collider(this.player, platform);
     this.physics.add.collider(this.penguin, platform);
+  }
+
+  winningScenario() {
+    super.winningScenario();
+    super.ready();
   }
 }

@@ -8,6 +8,8 @@ import OptionsScene from './Scenes/optionsScene';
 import CreditsScene from './Scenes/creditScene';
 import Level1 from './Scenes/Level/level1';
 import Level2 from './Scenes/Level/level2';
+import WinScenario from './Scenes/winScenario';
+import LostScenario from './Scenes/lostScenario';
 import Model from './model';
 
 class Game extends Phaser.Game {
@@ -22,7 +24,9 @@ class Game extends Phaser.Game {
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Level-1', Level1);
     this.scene.add('Level-2', Level2);
-    this.scene.start('Level-1');
+    this.scene.add('WinLevel', WinScenario);
+    this.scene.add('LostLevel', LostScenario);
+    this.scene.start('WinLevel', { level: 1 });
   }
 }
 

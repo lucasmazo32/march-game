@@ -9,21 +9,20 @@ let player;
 let ground;
 let cursors;
 let penguin;
-let winningText;
-let sceneTimer;
+let outcomeText;
+let scorePoints = 1000;
+let current;
 
 export default class GameScene extends Phaser.Scene {
-  constructor(scene) {
-    super(scene);
-    this.scene = scene;
+  constructor(currentScene) {
+    super(currentScene);
+    this.currentScene = currentScene;
     this.player = player;
     this.ground = ground;
     this.cursors = cursors;
     this.penguin = penguin;
-    this.winningText = winningText;
-    //this.pointScore = '';
-    this.sceneTimer = sceneTimer;
     this.scorePoints = 1000;
+    this.scoreText = '';
   }
 
   preload() {
@@ -49,15 +48,10 @@ export default class GameScene extends Phaser.Scene {
 
     // text
 
-    this.winningText = this.add.text(330, 0, ' ', { fontSize: '40px', fill: '#fff' });
-    //this.pointScore = this.add.text(0, 0, 'Score: 1000', { fontSize: '30px', fill: '#fff' });
-    /*
-    this.sceneTimer = this.time.addEvent({
-      callback: this.timeScoreFunction,
-      delay: 2000,
-      loop: true,
-    });
-    */
+    outcomeText = this.add.text(310, 20, ' ', { fontSize: 40, fill: '#fff' });
+    this.scoreText = this.add.text(10, 10, 'Score: 1000', { fontSize: 30, fill: '#fff' });
+
+    current = this.currentScene;
 
     // ground Static group
 
@@ -113,7 +107,6 @@ export default class GameScene extends Phaser.Scene {
     this.penguin = this.physics.add.sprite(20, 0, 'penguin').setScale(1.4);
     this.penguin.setCollideWorldBounds(true);
 
-
     this.anims.create({
       key: 'pengStand',
       frames: this.anims.generateFrameNumbers('penguin', { start: 6, end: 8 }),
@@ -157,15 +150,16 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  winningScenario() {
-    this.winningText.setText('You won!');
-    console.log(winningText);
+  scoreFun(textChange, delta) {
+    scorePoints += delta;
+    textChange.setText(`Score: ${scorePoints}`);
   }
-/*
-  timeScoreFunction() {
-    this.scorePoints += -50;
 
-    // console.log(this.pointScore);
+  winningScenario() {
+    outcomeText.setText('You won!');
   }
-  */
+
+  ready() {
+    this.scene.start('WinLevel', { level: parseInt(current.slice(6), 10) });
+  }
 }
