@@ -3,11 +3,14 @@ import 'phaser';
 import GameScene from '../gameScene';
 
 let platform;
-let coin;
+let fullChest;
+let openChest;
+let chestCond = false;
+let remOverlap;
 
 export default class Level1 extends GameScene {
   constructor() {
-    super('Level-2');
+    super('Level-3');
   }
 
   preload() {
@@ -17,7 +20,7 @@ export default class Level1 extends GameScene {
 
   create() {
     super.create();
-    this.text = this.add.text(635, 5, 'Level 2', { fontSize: 40, fill: '#fff' });
+    this.text = this.add.text(635, 5, 'Level 3', { fontSize: 40, fill: '#fff' });
 
     this.time.addEvent({
       delay: 300,
@@ -26,9 +29,22 @@ export default class Level1 extends GameScene {
       repeat: 199,
     });
 
-    coin = this.physics.add.group();
-    coin.create(750, 0, 'coin');
-    coin.create(650, 0, 'coin');
+    fullChest = this.physics.add.sprite(750, 0, 'full-chest');
+    fullChest.setBounce(0.2);
+
+    this.anims.create({
+      key: 'opening',
+      frames: this.anims.generateFrameNumbers('full-chest', { start: 0, end: 6 }),
+      frameRate: 1,
+    });
+
+    this.anims.create({
+      key: 'collected',
+      frames: this.anims.generateFrameNumbers('full-chest', { start: 7, end: 7 }),
+      frameRate: 1,
+    });
+
+    fullChest.anims.play('opening', true);
 
     // platform
 
@@ -66,17 +82,24 @@ export default class Level1 extends GameScene {
 
     this.physics.add.collider(this.player, platform);
     this.physics.add.collider(this.penguin, platform);
-    this.physics.add.collider(coin, platform);
+    this.physics.add.collider(fullChest, platform);
 
-    // Extra points with coin
+    // overlap
 
-    this.physics.add.overlap(this.player, coin, (thisPlayer, thisCoin) => {
-      super.coinFun(this.scoreText);
-      thisCoin.disableBody(true, true);
-    }, null, this);
+    remOverlap = this.physics.world;
+
+    openChest = this.physics.add.overlap(this.player, fullChest, () => {
+      if (chestCond) {
+        remOverlap.removeCollider(openChest);
+        return;
+      }
+      super.chestFun(this.scoreText);
+      fullChest.anims.play('collected', true);
+      chestCond = true;
+    });
   }
 
   winningScenario() {
-    super.winningScenario(2);
+    super.winningScenario(3);
   }
 }

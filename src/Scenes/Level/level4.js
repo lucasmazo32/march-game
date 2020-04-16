@@ -6,7 +6,7 @@ let platform;
 
 export default class Level1 extends GameScene {
   constructor() {
-    super('Level-1');
+    super('Level-4');
   }
 
   preload() {
@@ -16,6 +16,7 @@ export default class Level1 extends GameScene {
 
   create() {
     super.create();
+    this.text = this.add.text(635, 5, 'Level 4', { fontSize: 40, fill: '#fff' });
 
     this.time.addEvent({
       delay: 300,
@@ -27,23 +28,6 @@ export default class Level1 extends GameScene {
     // platform
 
     platform = this.physics.add.staticGroup();
-    platform.create(769, 450, 'plat-med');
-    platform.create(707, 450, 'plat-med');
-    platform.create(645, 450, 'plat-med');
-    platform.create(583, 450, 'plat-med');
-
-    platform.create(450, 350, 'plat-med');
-    platform.create(388, 350, 'plat-med');
-    platform.create(326, 350, 'plat-med');
-
-    platform.create(210, 250, 'plat-med');
-    platform.create(148, 250, 'plat-med');
-    platform.create(86, 250, 'plat-med');
-    platform.create(24, 250, 'plat-med');
-
-    // level 1 texts
-
-    this.text = this.add.text(635, 5, 'Level 1', { fontSize: 40, fill: '#fff' });
 
     // colide
 
@@ -52,6 +36,6 @@ export default class Level1 extends GameScene {
   }
 
   winningScenario() {
-    super.winningScenario(1);
+    super.winningScenario(4);
   }
 }

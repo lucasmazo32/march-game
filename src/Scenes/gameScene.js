@@ -4,6 +4,10 @@ import backgroundGame from '../assets/objects/bk-game.png';
 import character from '../assets/characters/character.png';
 import groundMed from '../assets/objects/plataform/WaveForest_Square.png';
 import penguinSprite from '../assets/objects/penguin.png';
+import fullChest from '../assets/objects/treasure_chest.png';
+import simpleCoin from '../assets/objects/CoinYellow.png';
+import platformMed from '../assets/objects/plataform/WaveForest_HalfSquare.png';
+
 
 let player;
 let ground;
@@ -11,12 +15,13 @@ let cursors;
 let penguin;
 let outcomeText;
 let scorePoints = 1000;
-let current;
+let currentScene;
+let timeFn;
 
 export default class GameScene extends Phaser.Scene {
-  constructor(currentScene) {
-    super(currentScene);
-    this.currentScene = currentScene;
+  constructor(scene) {
+    super(scene);
+    this.scene = scene;
     this.player = player;
     this.ground = ground;
     this.cursors = cursors;
@@ -40,6 +45,16 @@ export default class GameScene extends Phaser.Scene {
       startFrame: 0,
       endFrame: 11,
     });
+    currentScene = this.scene;
+    timeFn = this.time;
+    this.load.spritesheet('full-chest', fullChest, {
+      frameWidth: 35,
+      frameHeight: 35,
+      startFrame: 0,
+      endFrame: 7,
+    });
+    this.load.image('coin', simpleCoin);
+    this.load.image('plat-med', platformMed);
   }
 
 
@@ -50,8 +65,6 @@ export default class GameScene extends Phaser.Scene {
 
     outcomeText = this.add.text(310, 20, ' ', { fontSize: 40, fill: '#fff' });
     this.scoreText = this.add.text(10, 10, 'Score: 1000', { fontSize: 30, fill: '#fff' });
-
-    current = this.currentScene;
 
     // ground Static group
 
@@ -150,16 +163,35 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  setScoreDefault() {
+    scorePoints = 1000;
+  }
+
   scoreFun(textChange, delta) {
     scorePoints += delta;
     textChange.setText(`Score: ${scorePoints}`);
   }
 
-  winningScenario() {
-    outcomeText.setText('You won!');
+  coinFun(textChange) {
+    this.scoreFun(textChange, 50);
   }
 
-  ready() {
-    this.scene.start('WinLevel', { level: parseInt(current.slice(6), 10) });
+  chestFun(textChange) {
+    this.scoreFun(textChange, 200);
+  }
+
+  winningScenario(num, cond = true) {
+    outcomeText.setText('You won!');
+    const points = scorePoints;
+    timeFn.addEvent({
+      delay: 1000,
+      callback: () => {
+        if (cond) {
+          currentScene.start('WinLevel', { level: num, score: points });
+        } else {
+          currentScene.start('Title');
+        }
+      },
+    });
   }
 }
