@@ -3,16 +3,15 @@ import 'phaser';
 import GameScene from '../gameScene';
 
 let platform;
-// chest
 let fullChest;
-// mummy
-let mummy;
 // coin
 let coin;
+let mummy;
+let mummy1;
 
-export default class Level6 extends GameScene {
+export default class Level10 extends GameScene {
   constructor() {
-    super('Level-6');
+    super('Level-10');
   }
 
   preload() {
@@ -22,7 +21,7 @@ export default class Level6 extends GameScene {
 
   create() {
     super.create();
-    this.text = this.add.text(625, 5, 'Level 6', { fontSize: 40, fill: '#fff' });
+    this.text = this.add.text(600, 5, 'Level 10', { fontSize: 40, fill: '#fff' });
 
     this.time.addEvent({
       delay: 300,
@@ -31,42 +30,35 @@ export default class Level6 extends GameScene {
       repeat: 199,
     });
 
+
     // platform
 
     platform = this.physics.add.staticGroup();
 
-    platform.create(458, 450, 'plat-med');
-    platform.create(396, 450, 'plat-med');
-    platform.create(334, 450, 'plat-med');
-    platform.create(272, 450, 'plat-med');
-    platform.create(210, 450, 'plat-med');
-    platform.create(148, 450, 'plat-med');
-    platform.create(86, 450, 'plat-med');
-    platform.create(24, 450, 'plat-med');
+    platform.create(31, 400, 'plat-med');
 
-    platform.create(769, 350, 'plat-med');
-    platform.create(707, 350, 'plat-med');
-    platform.create(645, 350, 'plat-med');
-    platform.create(583, 350, 'plat-med');
-    platform.create(521, 350, 'plat-med');
-    platform.create(459, 350, 'plat-med');
-    platform.create(397, 350, 'plat-med');
+    platform.create(589, 450, 'plat-med');
+    platform.create(651, 450, 'plat-med');
+    platform.create(713, 450, 'plat-med');
+    platform.create(775, 450, 'plat-med');
 
+    platform.create(500, 350, 'plat-med');
 
-    platform.create(465, 250, 'plat-med');
-    platform.create(403, 250, 'plat-med');
-    platform.create(341, 250, 'plat-med');
-    platform.create(279, 250, 'plat-med');
-    platform.create(217, 250, 'plat-med');
-    platform.create(155, 250, 'plat-med');
+    platform.create(651, 250, 'plat-med');
+    platform.create(713, 250, 'plat-med');
+    platform.create(775, 250, 'plat-med');
+
+    platform.create(265, 150, 'plat-med');
+    platform.create(327, 150, 'plat-med');
+    platform.create(389, 150, 'plat-med');
+    platform.create(451, 150, 'plat-med');
+    platform.create(513, 150, 'plat-med');
+    platform.create(575, 150, 'plat-med');
+
     platform.create(93, 250, 'plat-med');
-    platform.create(31, 250, 'plat-med');
-
-    platform.create(769, 150, 'plat-med');
-    platform.create(707, 150, 'plat-med');
-    platform.create(645, 150, 'plat-med');
-    platform.create(583, 150, 'plat-med');
-    platform.create(521, 150, 'plat-med');
+    platform.create(155, 250, 'plat-med');
+    platform.create(217, 250, 'plat-med');
+    platform.create(279, 250, 'plat-med');
 
     // chest
 
@@ -91,9 +83,9 @@ export default class Level6 extends GameScene {
     // coin
 
     coin = this.physics.add.group();
-    coin.create(100, 420, 'coin');
-    coin.create(50, 420, 'coin');
-    coin.create(75, 420, 'coin');
+    coin.create(290, 200, 'coin');
+    coin.create(350, 0, 'coin');
+    coin.create(550, 0, 'coin');
 
     this.physics.add.collider(coin, platform);
     this.physics.add.overlap(this.player, coin, (thisPlayer, thisCoin) => {
@@ -103,7 +95,7 @@ export default class Level6 extends GameScene {
 
     // mummy
 
-    mummy = this.physics.add.sprite(540, 260, 'move-mummy');
+    mummy = this.physics.add.sprite(440, 60, 'move-mummy');
 
     mummy.setGravityY(300);
 
@@ -119,18 +111,41 @@ export default class Level6 extends GameScene {
 
     mummy.anims.play('moving-mummy', true);
     mummy.setCollideWorldBounds(true);
-    this.physics.add.overlap(this.player, mummy, () => { super.loosingScenario(6); });
+    this.physics.add.overlap(this.player, mummy, () => { super.loosingScenario(10); });
 
     this.time.addEvent({
       delay: 20,
       callback: () => {
-        this.physics.accelerateToObject(mummy, this.player, 6);
+        this.physics.accelerateToObject(mummy, this.player, 4);
       },
       loop: true,
     });
 
     this.physics.add.collider(platform, mummy);
     this.physics.add.collider(this.ground, mummy);
+    // mummy1
+
+    mummy1 = this.physics.add.sprite(780, 365, 'move-mummy');
+
+    mummy1.setGravityY(300);
+
+    mummy1.body.setSize(24, 32);
+    mummy1.body.setOffset(12, 32);
+
+    mummy1.anims.play('moving-mummy', true);
+    mummy1.setCollideWorldBounds(true);
+    this.physics.add.overlap(this.player, mummy1, () => { super.loosingScenario(10); });
+
+    this.time.addEvent({
+      delay: 20,
+      callback: () => {
+        this.physics.accelerateToObject(mummy1, this.player, 10);
+      },
+      loop: true,
+    });
+
+    this.physics.add.collider(platform, mummy1);
+    this.physics.add.collider(this.ground, mummy1);
 
     // colide
 
@@ -139,6 +154,6 @@ export default class Level6 extends GameScene {
   }
 
   winningScenario() {
-    super.winningScenario(6);
+    super.winningScenario(10, false);
   }
 }

@@ -4,9 +4,6 @@ import GameScene from '../gameScene';
 
 let platform;
 let fullChest;
-let openChest;
-let chestCond = false;
-let remOverlap;
 
 export default class Level1 extends GameScene {
   constructor() {
@@ -31,20 +28,6 @@ export default class Level1 extends GameScene {
 
     fullChest = this.physics.add.sprite(750, 0, 'full-chest');
     fullChest.setBounce(0.2);
-
-    this.anims.create({
-      key: 'opening',
-      frames: this.anims.generateFrameNumbers('full-chest', { start: 0, end: 6 }),
-      frameRate: 1,
-    });
-
-    this.anims.create({
-      key: 'collected',
-      frames: this.anims.generateFrameNumbers('full-chest', { start: 7, end: 7 }),
-      frameRate: 1,
-    });
-
-    fullChest.anims.play('opening', true);
 
     // platform
 
@@ -82,20 +65,27 @@ export default class Level1 extends GameScene {
 
     this.physics.add.collider(this.player, platform);
     this.physics.add.collider(this.penguin, platform);
-    this.physics.add.collider(fullChest, platform);
 
     // overlap
 
-    remOverlap = this.physics.world;
+    // chest
 
-    openChest = this.physics.add.overlap(this.player, fullChest, () => {
-      if (chestCond) {
-        remOverlap.removeCollider(openChest);
-        return;
-      }
+    fullChest = this.physics.add.sprite(750, 350, 'full-chest');
+    fullChest.setBounce(0.2);
+
+    this.anims.create({
+      key: 'opening',
+      frames: this.anims.generateFrameNumbers('full-chest', { start: 0, end: 6 }),
+      frameRate: 1,
+    });
+
+    fullChest.anims.play('opening', true);
+
+    this.physics.add.collider(fullChest, platform);
+
+    this.physics.add.overlap(this.player, fullChest, () => {
       super.chestFun(this.scoreText);
-      fullChest.anims.play('collected', true);
-      chestCond = true;
+      fullChest.disableBody(true, true);
     });
   }
 
