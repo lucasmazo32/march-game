@@ -69,7 +69,7 @@ export default class Level7 extends GameScene {
 
     // chest
 
-    fullChest = this.physics.add.sprite(750, 350, 'full-chest');
+    fullChest = this.physics.add.sprite(750, 50, 'full-chest');
     fullChest.setBounce(0.2);
 
     this.anims.create({

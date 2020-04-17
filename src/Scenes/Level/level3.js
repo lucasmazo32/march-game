@@ -26,9 +26,6 @@ export default class Level1 extends GameScene {
       repeat: 199,
     });
 
-    fullChest = this.physics.add.sprite(750, 0, 'full-chest');
-    fullChest.setBounce(0.2);
-
     // platform
 
     platform = this.physics.add.staticGroup();
@@ -66,11 +63,9 @@ export default class Level1 extends GameScene {
     this.physics.add.collider(this.player, platform);
     this.physics.add.collider(this.penguin, platform);
 
-    // overlap
-
     // chest
 
-    fullChest = this.physics.add.sprite(750, 350, 'full-chest');
+    fullChest = this.physics.add.sprite(750, 50, 'full-chest');
     fullChest.setBounce(0.2);
 
     this.anims.create({
