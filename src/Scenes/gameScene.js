@@ -208,9 +208,9 @@ export default class GameScene extends Phaser.Scene {
       delay: 1000,
       callback: () => {
         if (cond) {
-          currentScene.start('WinLevel', { level: num, score: points });
+          currentScene.start('WinLevel', { level: num, score: points, final: false });
         } else {
-          currentScene.start('Title');
+          currentScene.start('WinLevel', { level: num, score: points, final: true });
         }
       },
     });

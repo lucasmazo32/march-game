@@ -14,7 +14,9 @@ import Level4 from './Scenes/Level/level4';
 import Level5 from './Scenes/Level/level5';
 import Level6 from './Scenes/Level/level6';
 import Level7 from './Scenes/Level/level7';
+import LeaderChoose from './Scenes/leaderChoose';
 import NameScenario from './Scenes/nameScene';
+import LeaderBoard from './Scenes/leaderBoard';
 import CheckName from './Scenes/checkNameScene';
 import WinScenario from './Scenes/winScenario';
 import LostScenario from './Scenes/lostScenario';
@@ -38,6 +40,8 @@ class Game extends Phaser.Game {
     this.scene.add('Level-5', Level5);
     this.scene.add('Level-6', Level6);
     this.scene.add('Level-7', Level7);
+    this.scene.add('LeaderBoard', LeaderBoard);
+    this.scene.add('LeaderChoose', LeaderChoose);
     this.scene.add('WinLevel', WinScenario);
     this.scene.add('LostLevel', LostScenario);
     this.scene.add('InputName', NameScenario);

@@ -36,6 +36,6 @@ export default class Level7 extends GameScene {
   }
 
   winningScenario() {
-    super.winningScenario(7);
+    super.winningScenario(7, false);
   }
 }
