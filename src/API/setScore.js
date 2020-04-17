@@ -15,7 +15,7 @@ const appendScore = async (score, level) => {
     redirect: 'follow',
   };
 
-  const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/laUrAQpoNlxdvXLIuXva/scores/', requestOptions);
+  const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/IPX51VpIfsJ36tZFSzmK/scores/', requestOptions);
   const data = await response.json();
   return data;
 };
