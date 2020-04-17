@@ -106,13 +106,6 @@ export default class Level6 extends GameScene {
 
     // coin
 
-    this.time.addEvent({
-      delay: 300,
-      callback: super.scoreFun,
-      args: [this.scoreText, -5],
-      repeat: 199,
-    });
-
     coin = this.physics.add.group();
     coin.create(100, 420, 'coin');
     coin.create(50, 420, 'coin');

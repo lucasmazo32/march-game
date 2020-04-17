@@ -7,6 +7,8 @@ import background from '../assets/objects/bk-loading.png';
 import blueBtn1 from '../assets/ui/blue_button02.png';
 import blueBtn2 from '../assets/ui/blue_button03.png';
 
+const name = localStorage.getItem('Name');
+
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');
@@ -101,9 +103,10 @@ export default class PreloaderScene extends Phaser.Scene {
 
   ready() {
     this.readyCount += 1;
-    this.scene.start('Level-2');
-    if (this.readyCount === 2) {
-      this.scene.start('Title');
+    if (this.readyCount === 2 && name === null) {
+      this.scene.start('InputName');
+    } else if (this.readyCount === 2 && name !== null) {
+      this.scene.start('CheckName', { name });
     }
   }
 }

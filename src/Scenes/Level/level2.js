@@ -19,24 +19,12 @@ export default class Level1 extends GameScene {
     super.create();
     this.text = this.add.text(625, 5, 'Level 2', { fontSize: 40, fill: '#fff' });
 
-    // coin
-
     this.time.addEvent({
       delay: 300,
       callback: super.scoreFun,
       args: [this.scoreText, -5],
       repeat: 199,
     });
-
-    coin = this.physics.add.group();
-    coin.create(750, 0, 'coin');
-    coin.create(650, 0, 'coin');
-
-    this.physics.add.collider(coin, platform);
-    this.physics.add.overlap(this.player, coin, (thisPlayer, thisCoin) => {
-      super.coinFun(this.scoreText);
-      thisCoin.disableBody(true, true);
-    }, null, this);
 
     // platform
 
@@ -69,6 +57,18 @@ export default class Level1 extends GameScene {
     platform.create(707, 150, 'plat-med');
     platform.create(645, 150, 'plat-med');
     platform.create(583, 150, 'plat-med');
+
+    // coin
+
+    coin = this.physics.add.group();
+    coin.create(750, 0, 'coin');
+    coin.create(650, 0, 'coin');
+
+    this.physics.add.collider(coin, platform);
+    this.physics.add.overlap(this.player, coin, (thisPlayer, thisCoin) => {
+      super.coinFun(this.scoreText);
+      thisCoin.disableBody(true, true);
+    }, null, this);
 
     // colide
 
