@@ -11,7 +11,10 @@
 <!-- about-the-project -->
 # About the project
 
+![March Capture](/src/assets/march-shoot.png)
+
 "March - The game" is a five-day project created as part of the microverse curriculum. The main goal of the project is to showcase the ability to transform business requirements into solutions, as well as showing the ability to work with JavaScript, including but not limiting:
+
 
 - Babel
 - API, and therefore async functions
@@ -23,7 +26,7 @@ It is also an excellent opportunity to learn and work with a different framework
 
 The game itself is level-based, with the possibility of increasing the score by collecting coins and chests. Be careful with the mummies, though! The controls are the left, right, and up keys.
 
-Enjoy it!
+Enjoy it (Just get to that penguin)!
 
 ## Live version
 
