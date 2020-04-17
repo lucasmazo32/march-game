@@ -1,5 +1,6 @@
 ## Table of Contents
 
+* [Game](#game)
 * [About the Project](#about-the-project)
 * [Live version](#live-version)
 * [Built With](#built-with)
@@ -8,10 +9,21 @@
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
+<!-- game -->
+# Game
+![March Capture](/src/assets/march-shoot.png)
+
+March game is a game that has the classic run style. When I got the assignment, I knew that I wanted a level-based game, in which you have to get to a certain point to win. 
+
+The score for the game depends on how fast the player reaches the penguin (and if it takes all the extra points, like coins or chests). I looked for material that best fitted my goal and started developing level by level. 
+
+The game starts easy, and I added more difficulty through the rest of them. You will only need to use the arrows (up, left and right) to play, and is easy and fun to play around.
+
+For the final touch, I created as many necessary buttons as the game needed, so you can navigate through the different screens without the need to restart the page.
+
 <!-- about-the-project -->
 # About the project
 
-![March Capture](/src/assets/march-shoot.png)
 
 "March - The game" is a five-day project created as part of the microverse curriculum. The main goal of the project is to showcase the ability to transform business requirements into solutions, as well as showing the ability to work with JavaScript, including but not limiting:
 
