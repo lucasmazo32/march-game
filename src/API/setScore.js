@@ -1,11 +1,11 @@
+import { getUsername, levelFormat } from './helperFunctions';
+
 const appendScore = async (score, level) => {
   const myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
 
-  const username = localStorage.getItem('Name');
-
   const urlencoded = new URLSearchParams();
-  urlencoded.append('user', `Level-${level}-${username}`);
+  urlencoded.append('user', levelFormat(level, getUsername()));
   urlencoded.append('score', `${score}`);
 
   const requestOptions = {
