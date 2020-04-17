@@ -32,6 +32,5 @@ export default class WinScenario extends Phaser.Scene {
 
     // Play Again
     this.nextLevel = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Next Level', `Level-${this.level + 1}`);
-
   }
 }
