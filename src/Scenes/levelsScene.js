@@ -29,5 +29,7 @@ export default class LevelsScene extends Phaser.Scene {
     this.Level5 = new Button(this, config.width / 2, config.height / 2, 'blueButton1', 'blueButton2', 'Level 5', 'Level-5');
     this.Level6 = new Button(this, config.width / 2, config.height / 2 + 50, 'blueButton1', 'blueButton2', 'Level 6', 'Level-6');
     this.Level7 = new Button(this, config.width / 2, config.height / 2 + 100, 'blueButton1', 'blueButton2', 'Level 7', 'Level-7');
+    // Main menu
+    this.menu = new Button(this, config.width / 2, config.height / 2 + 200, 'blueButton1', 'blueButton2', 'Menu', 'Title');
   }
 }
