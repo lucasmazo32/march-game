@@ -13,7 +13,7 @@
 # Game
 ![March Capture](/src/assets/march-shoot.png)
 
-March game is a game that has the classic run style. When I got the assignment, I knew that I wanted a level-based game, in which you have to get to a certain point to win. 
+March is a game in the classic run style, which you win by getting a set number of points.
 
 The game's score depends on how fast the player reaches the penguin (and if it takes all the extra points, like coins or chests). I looked for material that best fitted my goal and started developing level by level. 
 
