@@ -74,6 +74,12 @@ If you want to build the production files for the project, run:
 
 > ``` npm run build ```
 
+## Future Features
+
+- Add more physics to the game, making it more realistic.
+
+- Add more levels with complex scenarios and monsters.
+
 # License
 
 > MIT
